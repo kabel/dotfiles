@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+# alias: brew service
+#:  * `service` [args...]
+#:    `brew service` is an alias for `brew services`
+brew services $*

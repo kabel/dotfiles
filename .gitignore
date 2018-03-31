@@ -1,0 +1,14 @@
+/atom/.apm
+/atom/blob-store
+/atom/packages
+/atom/recovery
+/composer/cache
+/composer/vendor
+/composer/.htaccess
+/composer/composer.lock
+/gnupg/*
+!/gnupg/*.conf
+/ssh/id_ecdsa
+/ssh/id_rsa
+/ssh/known_hosts
+secrets

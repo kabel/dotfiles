@@ -1,0 +1,8 @@
+{
+    "require": {
+        "phpmd/phpmd": "^2.6",
+        "phpunit/phpunit": "^7.0",
+        "stecman/composer-bash-completion-plugin": "dev-master",
+        "squizlabs/php_codesniffer": "^3.2"
+    }
+}

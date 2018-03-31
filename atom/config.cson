@@ -1,0 +1,20 @@
+"*":
+  "atom-material-ui":
+    colors:
+      abaseColor: "#011993"
+      accentColor: "#ad9100"
+      genAccent: true
+      paintCursor: true
+      predefinedColor: "Blue"
+    ui:
+      panelShadows: true
+  core:
+    telemetryConsent: "limited"
+    themes: [
+      "atom-material-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  "exception-reporting":
+    userId: "f3ba8c73-5852-408d-b208-ddab27a6923c"
+  welcome:
+    showOnStartup: false

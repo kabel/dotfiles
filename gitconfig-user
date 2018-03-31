@@ -1,0 +1,29 @@
+[user]
+	# Name used in commit messages.
+	name = Kevin Abel
+	# Email used in commit messages.
+	email = kevin.abel.0@gmail.com
+	# GPG key ID
+	signingkey = E0F7636DDDB96BF6
+[shell]
+	# Default SSH username.
+	username = kabel
+[bintray]
+	# Bintray username.
+	username = kabel
+[github]
+	# GitHub username for command-line tools.
+	user = kabel
+[alias]
+	# Push the current branch upstream to kabel using the same
+	# branch name for the remote branch.
+	um = !(git remote -v | grep -q kabel || hub fork) \
+	    && git push --set-upstream kabel $(git current-branch)
+	# Push the current branch to kabel and open a pull request.
+	umpr = !git um && hub pull-request -o
+[gpg]
+	# GPG Program for signing and verification
+	program = gpg2
+[commit]
+	# Sign commits
+	gpgSign = true
