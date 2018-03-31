@@ -179,14 +179,23 @@ then
   export EDITOR="vi"
 fi
 
-# GPG Agent
-if [ -z "$SSH_CONNECTION" ] && [ -f "$HOME/.gpg-agent-info" ]
+if [ -z "${SSH_CONNECTION}" ] && quiet_which gpgconf
 then
-	source "$HOME/.gpg-agent-info"
-  export GPG_AGENT_INFO
-  export SSH_AUTH_SOCK
-  export SSH_AGENT_PID
-  #launchctl setenv SSH_AUTH_SOCK $SSH_AUTH_SOCK
+  # Enable gpg-agent if it is not running
+  GPG_AGENT_SOCKET="$(gpgconf --list-dirs agent-ssh-socket)"
+  if [ ! -S $GPG_AGENT_SOCKET ]; then
+    gpg-agent --daemon >/dev/null 2>&1
+    export GPG_TTY=$(tty)
+  fi
+
+  # Set SSH to use gpg-agent if it is configured to do so
+  GPG_SSH_SUPPORT=$(gpgconf --list-options gpg-agent | grep enable-ssh-support | cut -d : -f 10)
+  if [ -n "$GPG_SSH_SUPPORT" ]
+  then
+    unset SSH_AGENT_PID
+    export SSH_AUTH_SOCK=$GPG_AGENT_SOCKET
+    # launchctl setenv SSH_AUTH_SOCK $GPG_AGENT_SOCKET
+  fi
 fi
 
 # Run dircolors if it exists
