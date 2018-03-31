@@ -37,25 +37,27 @@ shopt -s cdspell
 [ -f "$HOME/.composer/vendor/stecman/composer-bash-completion-plugin/hooks/bash-completion" ] && source "$HOME/.composer/vendor/stecman/composer-bash-completion-plugin/hooks/bash-completion" >/dev/null
 
 # Colorful prompt
-USER_COLOR="1;37"
-HOST_COLOR="1;34"
+USER_COLOR="\\[$(tput bold)$(tput setaf 7)\\]"
+HOST_COLOR="\\[$(tput bold)$(tput setaf 4)\\]"
+RESET_COLOR="\\[$(tput sgr0)\\]"
 
 if [ "$USER" = "root" ]
 then
-  USER_COLOR="1;35"
+  USER_COLOR="$(tput bold)$(tput setaf 5)"
 fi
 
 if [ -n "${SSH_CONNECTION}" ]
 then
-  HOST_COLOR="1;36"
+  HOST_COLOR="$(tput bold)$(tput setaf 6)"
 fi
 
-PS1_PREFIX="[\[\e[${USER_COLOR}m\]\u\[\e[m\]@\[\e[${HOST_COLOR}m\]\h\[\e[m\] \W"
-PS1_SUFFIX="]\$ "
+PS1_PREFIX="[${USER_COLOR}\\u${RESET_COLOR}@${HOST_COLOR}\\h$RESET_COLOR \\W"
+PS1_SUFFIX=']\$ '
 PS1="${PS1_PREFIX}${PS1_SUFFIX}"
 
 unset USER_COLOR
 unset HOST_COLOR
+unset RESET_COLOR
 
 set_git_prompt() {
   return

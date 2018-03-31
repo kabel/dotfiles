@@ -2,21 +2,16 @@
 # shellcheck disable=SC2155
 
 # Colourful manpages
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
+export LESS_TERMCAP_mb="$(tput bold)$(tput setaf 1)"
+export LESS_TERMCAP_md="$(tput bold)$(tput setaf 1)"
+export LESS_TERMCAP_me="$(tput sgr0)"
+export LESS_TERMCAP_se="$(tput sgr0)"
+export LESS_TERMCAP_so="$(tput bold)$(tput setaf 3)$(tput setab 4)"
+export LESS_TERMCAP_ue="$(tput sgr0)"
+export LESS_TERMCAP_us="$(tput bold)$(tput setaf 2)"
 
 # Set to avoid `env` output from changing console colour
-export LESS_TERMEND=$'\E[0m'
-
-# Print field by number
-field() {
-  ruby -ane "puts \$F[$1]"
-}
+export LESS_TERMEND=$(tput sgr0)
 
 # Setup paths
 remove_from_path() {
