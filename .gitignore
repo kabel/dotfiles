@@ -12,3 +12,4 @@
 /ssh/id_rsa
 /ssh/known_hosts
 secrets
+/vim/.netrwhist
