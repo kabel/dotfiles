@@ -33,7 +33,6 @@ shopt -s cdspell
 [ -f "$HOMEBREW_PREFIX/share/bash-completion/bash_completion" ] && source "$HOMEBREW_PREFIX//share/bash-completion/bash_completion" >/dev/null
 [ -f "$HOME/.composer/vendor/stecman/composer-bash-completion-plugin/hooks/bash-completion" ] && source "$HOME/.composer/vendor/stecman/composer-bash-completion-plugin/hooks/bash-completion" >/dev/null
 
-
 # Colorful prompt
 USER_COLOR="1;37"
 HOST_COLOR="1;34"
@@ -61,7 +60,7 @@ set_git_prompt() {
 precmd_functions+=(set_git_prompt)
 
 # iTerm2 Integration
-[ -f "$HOME/.iterm2_shell_integration.bash" ] && source "$HOME/.iterm2_shell_integration.bash" >/dev/null
+source "$HOME/.iterm2_shell_integration.bash"
 
 if [ -f "$HOMEBREW_PREFIX/etc/bash_completion.d/git-prompt.sh" ]
 then
@@ -74,6 +73,16 @@ then
   then
     export PROMPT_COMMAND="$PROMPT_COMMAND; set_git_prompt"
   fi
+fi
+
+if [ -z "$ITERM_SHELL_INTEGRATION_INSTALLED" ]
+then
+  export PROMPT_COMMAND="$PROMPT_COMMAND; history -a"
+else
+  __flush_history() {
+    history -a
+  }
+  precmd_functions+=(__flush_history)
 fi
 
 # only set key bindings on interactive shell
