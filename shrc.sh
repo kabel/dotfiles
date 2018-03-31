@@ -106,13 +106,17 @@ then
   export GREP_OPTIONS="--color=auto"
   export CLICOLOR="1"
 
+#  add_to_path_end /Applications/Xcode.app/Contents/Developer/usr/bin
+#  add_to_path_end /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+  add_to_path_end "$HOMEBREW_PREFIX/opt/git/share/git-core/contrib/diff-highlight"
+
   if quiet_which diff-highlight
   then
     # shellcheck disable=SC2016
-    export GIT_PAGER='diff-highlight | less -+$LESS -RX'
+    export GIT_PAGER='diff-highlight | less -+$LESS -RXF'
   else
     # shellcheck disable=SC2016
-    export GIT_PAGER='less -+$LESS -RX'
+    export GIT_PAGER='less -+$LESS -RXF'
   fi
 
   #export JAVA_HOME=$(/usr/libexec/java_home)
@@ -134,10 +138,6 @@ then
     alias ll.="ls -FGld .*"
     alias ls="ls -FG"
   fi
-
-#  add_to_path_end /Applications/Xcode.app/Contents/Developer/usr/bin
-#  add_to_path_end /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-  add_to_path_end "$HOMEBREW_PREFIX/opt/git/share/git-core/contrib/diff-highlight"
 
   alias ql="qlmanage -p 1>/dev/null"
   alias locate="mdfind -name"
