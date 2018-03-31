@@ -21,18 +21,19 @@ field() {
 # Setup paths
 remove_from_path() {
   [ -d "$1" ] || return
-  # Doesn't work for first item in the PATH but I don't care.
-  export PATH=${PATH//:$1/}
+  export PATH=$(echo "$PATH" | sed -e "s@:$1:@@g" -e "s@^$1:@@g" -e "s@:$1\$@@g" -e "s@^$1\$@@g")
 }
 
 add_to_path_start() {
   [ -d "$1" ] || return
+  echo "$PATH" | grep -qe "^$1:" && return
   remove_from_path "$1"
   export PATH="$1:$PATH"
 }
 
 add_to_path_end() {
   [ -d "$1" ] || return
+  echo "$PATH" | grep -qe ":$1$" && return
   remove_from_path "$1"
   export PATH="$PATH:$1"
 }
@@ -43,7 +44,7 @@ force_add_to_path_start() {
 }
 
 quiet_which() {
-  which "$1" &>/dev/null
+  which "$1" 1>/dev/null 2>/dev/null
 }
 
 add_to_path_end "$HOME/bin"
@@ -141,10 +142,11 @@ then
 
   alias ql="qlmanage -p 1>/dev/null"
   alias locate="mdfind -name"
-  alias cpwd="pwd | tr -d '\n' | pbcopy"
+  alias cpwd="pwd | tr -d '\\n' | pbcopy"
   alias finder-hide="setfile -a V"
 
   # Old default Curl is broken for Git on Leopard.
+  # shellcheck disable=SC2039
   [ "$OSTYPE" = "darwin9.0" ] && export GIT_SSL_NO_VERIFY=1
 elif [ "$LINUX" ]
 then
@@ -183,7 +185,7 @@ if [ -z "${SSH_CONNECTION}" ] && quiet_which gpgconf
 then
   # Enable gpg-agent if it is not running
   GPG_AGENT_SOCKET="$(gpgconf --list-dirs agent-ssh-socket)"
-  if [ ! -S $GPG_AGENT_SOCKET ]; then
+  if [ ! -S "$GPG_AGENT_SOCKET" ]; then
     gpg-agent --daemon >/dev/null 2>&1
     export GPG_TTY=$(tty)
   fi
@@ -203,9 +205,7 @@ quiet_which dircolors && eval "$(dircolors -b)"
 
 # Save directory changes
 cd() {
-  builtin cd "$@" || return
-  [ "$TERMINALAPP" ] && which set_terminal_app_pwd &>/dev/null \
-    && set_terminal_app_pwd
+  command cd "$@" || return
   pwd > "$HOME/.lastpwd"
   ls
 }
@@ -228,16 +228,16 @@ trash() {
 }
 
 # GitHub API shortcut
-github-api-curl() {
+github_api_curl() {
   curl -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/$1"
 }
-alias github-api-curl="noglob github-api-curl"
+alias github_api_curl="noglob github-api-curl"
 
 # Atom packages backup
-apm-backup() {
+apm_backup() {
   apm list --installed --bare > "$HOME/.atom/Packagesfile"
 }
 
-apm-restore() {
+apm_restore() {
   apm install --packages-file "$HOME/.atom/Packagesfile"
 }

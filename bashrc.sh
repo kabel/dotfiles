@@ -1,10 +1,13 @@
+#!/bin/bash
 # check if this is a login shell
 [ "$0" = "-bash" ] && export LOGIN_BASH="1"
 
 # run bash_profile if this is not a login shell
+# shellcheck source=bash_profile.sh
 [ -z "$LOGIN_BASH" ] && source ~/.bash_profile
 
 # load shared shell configuration
+# shellcheck source=shrc.sh
 source ~/.shrc
 
 # History

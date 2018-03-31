@@ -1,3 +1,6 @@
+#!/bin/sh
+# shellcheck disable=SC2155
+
 # 077 would be more secure, but 022 is more useful.
 umask 022
 
@@ -42,20 +45,21 @@ then
 fi
 
 # Enable iTerm.app tab titles
-if [ "$TERM_PROGRAM" == "iTerm.app" ] && echo $TERM | grep -q xterm
+if [ "$TERM_PROGRAM" = "iTerm.app" ] && echo "$TERM" | grep -q xterm
 then
     set_iterm_app_pwd() {
-      printf "\e]0;%s@%s:%s\a" "${USER}" "${HOSTNAME%%.*}" "${PWD/$HOME/\~}"
+      printf '\e]0;%s@%s:%s\a' "${USER}" "${HOST%%.*}" "$(echo "$PWD" | sed -e "s@$HOME@~@g")"
     }
     PROMPT_COMMAND='set_iterm_app_pwd'
 fi
 
 [ -s ~/.lastpwd ] && [ "$PWD" = "$HOME" ] && \
-  builtin cd "$(cat ~/.lastpwd)" 2>/dev/null
+  command cd "$(cat ~/.lastpwd)" 2>/dev/null
 [ $TERMINALAPP ] && set_terminal_app_pwd
 
 # Load secrets
-[ -f "$HOME/.secrets" ] && source "$HOME/.secrets"
+# shellcheck disable=SC1090
+[ -f "$HOME/.secrets" ] && . "$HOME/.secrets"
 
 # Some post-secret aliases
 export HOMEBREW_GITHUB_TOKEN="$GITHUB_TOKEN"

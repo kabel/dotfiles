@@ -1,4 +1,6 @@
+#!/bin/bash
 # load shared shell configuration
+# shellcheck source=shprofile.sh
 source ~/.shprofile
 
 # check if this is a login and/or interactive shell
@@ -8,6 +10,7 @@ echo "$-" | grep -q "i" && export INTERACTIVE_BASH="1"
 # run bashrc if this is a login, interactive shell
 if [ -n "$LOGIN_BASH" ] && [ -n "$INTERACTIVE_BASH" ]
 then
+  # shellcheck source=bashrc.sh
   source ~/.bashrc
 fi
 
@@ -68,6 +71,7 @@ then
     __git_ps1 "$PS1_PREFIX" "$PS1_SUFFIX"
   }
 
+  # shellcheck disable=SC2034
   GIT_PS1_SHOWCOLORHINTS=true
   if [ -z "$ITERM_SHELL_INTEGRATION_INSTALLED" ]
   then
