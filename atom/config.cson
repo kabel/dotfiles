@@ -4,9 +4,13 @@
       abaseColor: "#011993"
       accentColor: "#ad9100"
       genAccent: true
-      paintCursor: true
       predefinedColor: "Blue"
+    tabs:
+      compactTabs: true
+      stretchedTabs: true
+      tintedTabBar: true
     ui:
+      panelContrast: true
       panelShadows: true
   core:
     telemetryConsent: "limited"

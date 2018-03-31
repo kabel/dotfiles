@@ -232,3 +232,12 @@ github-api-curl() {
   curl -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/$1"
 }
 alias github-api-curl="noglob github-api-curl"
+
+# Atom packages backup
+apm-backup() {
+  apm list --installed --bare > "$HOME/.atom/Packagesfile"
+}
+
+apm-restore() {
+  apm install --packages-file "$HOME/.atom/Packagesfile"
+}
