@@ -62,4 +62,4 @@ fi
 [ -f "$HOME/.secrets" ] && . "$HOME/.secrets"
 
 # Some post-secret aliases
-export HOMEBREW_GITHUB_TOKEN="$GITHUB_TOKEN"
+export HOMEBREW_GITHUB_API_TOKEN="$GITHUB_TOKEN"
