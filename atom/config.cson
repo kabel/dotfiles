@@ -20,5 +20,9 @@
     ]
   "exception-reporting":
     userId: "f3ba8c73-5852-408d-b208-ddab27a6923c"
+  "linter-phpcs":
+    disableWhenNoConfigFile: true
+  "linter-ui-default":
+    showPanel: true
   welcome:
     showOnStartup: false

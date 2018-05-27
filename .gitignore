@@ -5,7 +5,9 @@
 /composer/cache
 /composer/vendor
 /composer/.htaccess
+/composer/auth.json
 /composer/composer.lock
+/composer/config.json
 /gnupg/*
 !/gnupg/*.conf
 /ssh/id_ecdsa
