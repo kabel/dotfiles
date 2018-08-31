@@ -2,6 +2,7 @@
 /atom/blob-store
 /atom/packages
 /atom/recovery
+atom/split-diff
 /composer/cache
 /composer/vendor
 /composer/.htaccess
