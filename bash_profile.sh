@@ -4,7 +4,7 @@
 source ~/.shprofile
 
 # check if this is a login and/or interactive shell
-[ "$0" = "-bash" ] && export LOGIN_BASH="1"
+shopt -q login_shell && export LOGIN_BASH="1"
 echo "$-" | grep -q "i" && export INTERACTIVE_BASH="1"
 
 # run bashrc if this is a login, interactive shell
