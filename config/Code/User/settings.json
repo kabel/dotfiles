@@ -1,0 +1,8 @@
+{
+    "telemetry.enableTelemetry": false,
+    "workbench.statusBar.feedback.visible": false,
+    "git.confirmSync": false,
+    "breadcrumbs.enabled": true,
+    "ruby.rubocop.executePath": "/usr/local/lib/ruby/gems/2.6.0/bin/",
+    "workbench.iconTheme": "material-icon-theme"
+}

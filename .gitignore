@@ -9,6 +9,19 @@ atom/split-diff
 /composer/auth.json
 /composer/composer.lock
 /composer/config.json
+/config/Code/Backups
+/config/Code/Cache*
+/config/Code/GPUCache
+/config/Code/Local Storage
+/config/Code/logs
+/config/Code/User/globalStorage
+/config/Code/User/workspaceStorage
+/config/Code/Cookies*
+/config/Code/languagepacks.json
+/config/Code/machineid
+/config/Code/Preferences
+/config/Code/storage.json
+/config/hub
 /gnupg/*
 !/gnupg/*.conf
 /ssh/id_ecdsa

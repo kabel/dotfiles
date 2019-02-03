@@ -163,9 +163,9 @@ then
 fi
 
 # Set up editor
-if [ -z "${SSH_CONNECTION}" ] && quiet_which atom
+if [ -z "${SSH_CONNECTION}" ] && quiet_which code
 then
-  export EDITOR="atom"
+  export EDITOR="code"
   export GIT_EDITOR="$EDITOR -w"
   export SVN_EDITOR=$GIT_EDITOR
 elif quiet_which vim
@@ -235,4 +235,12 @@ apm_backup() {
 
 apm_restore() {
   apm install --packages-file "$HOME/.atom/Packagesfile"
+}
+
+code_backup() {
+  code --list-extensions > "$HOME/.config/Code/User/Extensionsfile"
+}
+
+code_restore() {
+  cat "$HOME/.config/Code/User/Extensionsfile" | xargs -n1 code --install-extension
 }
