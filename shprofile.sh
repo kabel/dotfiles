@@ -45,7 +45,8 @@ then
 fi
 
 # Enable iTerm.app tab titles
-if [ "$TERM_PROGRAM" = "iTerm.app" ] && echo "$TERM" | grep -q xterm
+[ "$TERM_PROGRAM" = "iTerm.app" ] && export ITERMAPP=1
+if [ $ITERMAPP ] && echo "$TERM" | grep -q xterm
 then
     set_iterm_app_pwd() {
       printf '\e]0;%s@%s:%s\a' "${USER}" "${HOST%%.*}" "$(echo "$PWD" | sed -e "s@$HOME@~@g")"

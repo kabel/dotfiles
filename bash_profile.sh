@@ -65,7 +65,10 @@ set_git_prompt() {
 precmd_functions+=(set_git_prompt)
 
 # iTerm2 Integration
-source "$HOME/.iterm2_shell_integration.bash"
+if [ ITERMAPP ]
+then
+  source "$HOME/.iterm2_shell_integration.bash"
+fi
 
 if [ -f "$HOMEBREW_PREFIX/etc/bash_completion.d/git-prompt.sh" ]
 then
@@ -77,13 +80,13 @@ then
   GIT_PS1_SHOWCOLORHINTS=true
   if [ -z "$ITERM_SHELL_INTEGRATION_INSTALLED" ]
   then
-    export PROMPT_COMMAND="$PROMPT_COMMAND; set_git_prompt"
+    export PROMPT_COMMAND="set_git_prompt; $PROMPT_COMMAND"
   fi
 fi
 
 if [ -z "$ITERM_SHELL_INTEGRATION_INSTALLED" ]
 then
-  export PROMPT_COMMAND="$PROMPT_COMMAND; history -a"
+  export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 else
   __flush_history() {
     history -a
