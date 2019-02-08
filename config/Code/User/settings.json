@@ -4,5 +4,7 @@
     "git.confirmSync": false,
     "breadcrumbs.enabled": true,
     "ruby.rubocop.executePath": "/usr/local/lib/ruby/gems/2.6.0/bin/",
-    "workbench.iconTheme": "material-icon-theme"
+    "workbench.iconTheme": "material-icon-theme",
+    "php.suggest.basic": false,
+    "phpcs.standard": "PSR2"
 }

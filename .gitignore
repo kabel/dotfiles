@@ -10,15 +10,19 @@ atom/split-diff
 /composer/composer.lock
 /composer/config.json
 /config/Code/Backups
+/config/Code/blob_storage
 /config/Code/Cache*
 /config/Code/GPUCache
 /config/Code/Local Storage
 /config/Code/logs
 /config/Code/User/globalStorage
 /config/Code/User/workspaceStorage
+/config/Code/webrtc_event_logs
+/config/Code/*.sock
 /config/Code/Cookies*
 /config/Code/languagepacks.json
 /config/Code/machineid
+/config/Code/Network Persistent State
 /config/Code/Preferences
 /config/Code/storage.json
 /config/hub
