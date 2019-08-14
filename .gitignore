@@ -25,6 +25,7 @@ atom/split-diff
 /config/Code/Network Persistent State
 /config/Code/Preferences
 /config/Code/storage.json
+/config/configstore/update-notifier-*
 /config/hub
 /gnupg/*
 !/gnupg/*.conf
