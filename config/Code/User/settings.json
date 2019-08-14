@@ -6,5 +6,14 @@
     "ruby.rubocop.executePath": "/usr/local/lib/ruby/gems/2.6.0/bin/",
     "workbench.iconTheme": "material-icon-theme",
     "php.suggest.basic": false,
-    "phpcs.standard": "PSR2"
+    "phpcs.standard": "PSR2",
+    "git.autofetch": true,
+    "editor.minimap.enabled": false,
+    "ruby.intellisense": "rubyLocate",
+    "ruby.codeCompletion": "rcodetools",
+    "window.zoomLevel": 0,
+    "files.associations": {
+        "*.azp.yml": "azure-pipelines"
+    },
+    "ruby.useLanguageServer": true
 }
