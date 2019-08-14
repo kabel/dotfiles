@@ -12,5 +12,5 @@ source ~/.shrc
 
 # History
 export HISTFILE=~/.bash_history
-export HISTCONTROL=ignoredups
+export HISTCONTROL=ignoredups:ignorespace
 export HISTIGNORE="&:ls:[bf]g:exit"
