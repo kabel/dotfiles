@@ -24,6 +24,7 @@ atom/split-diff
 /config/Code/machineid
 /config/Code/Network Persistent State
 /config/Code/Preferences
+/config/Code/rapid_render.json
 /config/Code/storage.json
 /config/configstore/update-notifier-*
 /config/hub
