@@ -65,7 +65,7 @@ set_git_prompt() {
 precmd_functions+=(set_git_prompt)
 
 # iTerm2 Integration
-if [ ITERMAPP ]
+if [ $ITERMAPP ]
 then
   source "$HOME/.iterm2_shell_integration.bash"
 fi

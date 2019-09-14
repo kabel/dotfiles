@@ -39,7 +39,7 @@ force_add_to_path_start() {
 }
 
 quiet_which() {
-  which "$1" 1>/dev/null 2>/dev/null
+  command -v "$1" 1>/dev/null 2>&1
 }
 
 add_to_path_end "$HOME/bin"
@@ -242,5 +242,6 @@ code_backup() {
 }
 
 code_restore() {
+  # shellcheck disable=SC2002
   cat "$HOME/.config/Code/User/Extensionsfile" | xargs -n1 code --install-extension
 }
