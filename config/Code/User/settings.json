@@ -17,7 +17,6 @@
     "ruby.useLanguageServer": true,
     "editor.emptySelectionClipboard": false,
     "terminal.integrated.copyOnSelection": true,
-    "workbench.colorTheme": "Material Theme Darker High Contrast",
     "editor.fontLigatures": true,
     "workbench.colorCustomizations": {
         "activityBarBadge.background": "#2979FF",
