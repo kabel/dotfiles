@@ -33,7 +33,7 @@ shopt -s cdspell
 # Bash completion
 [ -f /etc/profile.d/bash-completion ] && source /etc/profile.d/bash-completion
 [ -f "$HOMEBREW_PREFIX/etc/bash_completion" ] && source "$HOMEBREW_PREFIX/etc/bash_completion" >/dev/null
-[ -f "$HOMEBREW_PREFIX/share/bash-completion/bash_completion" ] && source "$HOMEBREW_PREFIX//share/bash-completion/bash_completion" >/dev/null
+[ -f "$HOMEBREW_PREFIX/share/bash-completion/bash_completion" ] && export BASH_COMPLETION_COMPAT_DIR="$HOMEBREW_PREFIX/etc/bash_completion.d" && source "$HOMEBREW_PREFIX/share/bash-completion/bash_completion" >/dev/null
 [ -f "$HOME/.composer/vendor/stecman/composer-bash-completion-plugin/hooks/bash-completion" ] && source "$HOME/.composer/vendor/stecman/composer-bash-completion-plugin/hooks/bash-completion" >/dev/null
 
 # Colorful prompt
