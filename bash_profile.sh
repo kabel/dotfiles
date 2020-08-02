@@ -51,8 +51,8 @@ then
   HOST_COLOR="$(tput bold)$(tput setaf 6)"
 fi
 
-PS1_PREFIX="[${USER_COLOR}\\u${RESET_COLOR}@${HOST_COLOR}\\h$RESET_COLOR \\W"
-PS1_SUFFIX=']\$ '
+PS1_PREFIX="${USER_COLOR}\\u${RESET_COLOR}@${HOST_COLOR}\\h$RESET_COLOR \\W"
+PS1_SUFFIX='\n\$ '
 PS1="${PS1_PREFIX}${PS1_SUFFIX}"
 
 unset USER_COLOR
