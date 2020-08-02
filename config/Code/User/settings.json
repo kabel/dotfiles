@@ -2,7 +2,7 @@
     "telemetry.enableTelemetry": false,
     "git.confirmSync": false,
     "breadcrumbs.enabled": true,
-    "ruby.rubocop.executePath": "/usr/local/lib/ruby/gems/2.6.0/bin/",
+    "ruby.rubocop.executePath": "/usr/local/lib/ruby/gems/2.7.0/bin/",
     "workbench.iconTheme": "material-icon-theme",
     "php.suggest.basic": false,
     "phpcs.standard": "PSR2",
@@ -41,5 +41,8 @@
         "editor.findMatchBorder": "#2979FF",
         "selection.background": "#2979FF40"
     },
-    "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace"
+    "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "terminal.integrated.scrollback": 10000,
+    "explorer.autoReveal": false
 }
