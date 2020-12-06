@@ -1,0 +1,6 @@
+#! /usr/local/bin/bash
+# alias: brew g
+#:  * `g` [args...]
+#:    `brew g` is an alias for `brew upgrade`
+brew upgrade $*
+
