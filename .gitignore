@@ -12,6 +12,7 @@ atom/split-diff
 /config/Code/Backups
 /config/Code/blob_storage
 /config/Code/Cache*
+/config/Code/Crashpad*
 /config/Code/GPUCache
 /config/Code/Local Storage
 /config/Code/logs
