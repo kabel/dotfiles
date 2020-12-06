@@ -196,3 +196,5 @@
 [commit]
 	# Show the diff as a comment in the commit message template.
 	verbose = true
+[pull]
+	rebase = true
