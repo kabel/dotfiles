@@ -32,6 +32,7 @@ atom/split-diff
 /config/Code/storage.json
 /config/configstore/update-notifier-*
 /config/hub
+/config/iterm2/AppSupport
 /gnupg/*
 !/gnupg/*.conf
 /ssh/id_ecdsa
