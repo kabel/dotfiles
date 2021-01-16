@@ -105,6 +105,7 @@ then
 #  add_to_path_end /Applications/Xcode.app/Contents/Developer/usr/bin
 #  add_to_path_end /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
   add_to_path_end "$HOMEBREW_PREFIX/opt/git/share/git-core/contrib/diff-highlight"
+  add_to_path_end "$(gem environment gemdir)/bin"
 
   if quiet_which diff-highlight
   then
