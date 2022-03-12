@@ -67,34 +67,11 @@ then
   export HOMEBREW_PREFIX="$(brew --prefix)"
   export HOMEBREW_REPOSITORY="$(brew --repo)"
   export HOMEBREW_AUTO_UPDATE_SECS=3600
-  export HOMEBREW_BINTRAY_USER="$(git config bintray.username)"
   export HOMEBREW_DEVELOPER=1
   export HOMEBREW_PRY=1
 
   alias hbc='cd $HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-core'
 
-  # Output whether the dependencies for a Homebrew package are bottled.
-  brew_bottled_deps() {
-    for DEP in "$@"; do
-      echo "$DEP deps:"
-      brew deps "$DEP" | xargs brew info | grep stable
-      [ "$#" -ne 1 ] && echo
-    done
-  }
-
-  # Output the most popular unbottled Homebrew packages
-  brew_popular_unbottled() {
-    brew deps --all |
-      awk '{ gsub(":? ", "\n") } 1' |
-      sort |
-      uniq -c |
-      sort |
-      tail -n 500 |
-      awk '{print $2}' |
-      xargs brew info |
-      grep stable |
-      grep -v bottled
-  }
 fi
 
 if [ "$MACOS" ]
@@ -187,7 +164,7 @@ then
   fi
 
   # Set SSH to use gpg-agent if it is configured to do so
-  GPG_SSH_SUPPORT=$(gpgconf --list-options gpg-agent | grep enable-ssh-support | cut -d : -f 10)
+  GPG_SSH_SUPPORT=$(gpgconf --list-options gpg-agent 2>/dev/null | grep enable-ssh-support | cut -d : -f 10)
   if [ -n "$GPG_SSH_SUPPORT" ]
   then
     unset SSH_AGENT_PID
@@ -212,12 +189,6 @@ json() {
   jsonlint "$1" | jq .
 }
 
-# Pretty-print Homebrew install receipts
-receipt() {
-  [ -n "$1" ] || return
-  json "$HOMEBREW_PREFIX/opt/$1/INSTALL_RECEIPT.json"
-}
-
 # Move files to the Trash folder
 trash() {
   mv "$@" "$HOME/.Trash/"
@@ -228,15 +199,6 @@ github_api_curl() {
   curl -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/$1"
 }
 alias github_api_curl="noglob github-api-curl"
-
-# Atom packages backup
-apm_backup() {
-  apm list --installed --bare > "$HOME/.atom/Packagesfile"
-}
-
-apm_restore() {
-  apm install --packages-file "$HOME/.atom/Packagesfile"
-}
 
 code_backup() {
   code --list-extensions > "$HOME/.config/Code/User/Extensionsfile"
