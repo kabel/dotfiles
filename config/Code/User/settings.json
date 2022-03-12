@@ -43,10 +43,8 @@
     "phpcs.standard": "PSR2",
     "ruby.codeCompletion": "rcodetools",
     "ruby.intellisense": "rubyLocate",
-    "ruby.rubocop.executePath": "/usr/local/lib/ruby/gems/3.0.0/bin/",
-    "ruby.rubocop.suppressRubocopWarnings": true,
     "ruby.useLanguageServer": true,
-    "telemetry.enableTelemetry": false,
+    "telemetry.telemetryLevel": "crash",
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.scrollback": 10000,
     "todo-tree.tree.showScanModeButton": false,
@@ -86,5 +84,6 @@
     "workbench.colorTheme": "Material Theme Darker High Contrast",
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.startupEditor": "newUntitledFile"
+    "workbench.startupEditor": "newUntitledFile",
+    "ruby.rubocop.executePath": "/usr/local/Homebrew/Library/Homebrew/shims/gems/"
 }
