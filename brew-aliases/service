@@ -3,3 +3,4 @@
 #:  * `service` [args...]
 #:    `brew service` is an alias for `brew services`
 brew services $*
+
