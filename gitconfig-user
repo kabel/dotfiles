@@ -23,7 +23,7 @@
 	umpr = !git um && hub pull-request -o
 [gpg]
 	# GPG Program for signing and verification
-	program = gpg2
+	program = /usr/local/bin/gpg
 [commit]
 	# Sign commits
 	gpgSign = true
