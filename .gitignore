@@ -40,6 +40,7 @@ atom/split-diff
 /config/configstore/update-notifier-*
 /config/hub
 /config/iterm2/AppSupport
+/config/qBittorrent
 /gnupg/*
 !/gnupg/*.conf
 /ssh/id_ecdsa
