@@ -11,12 +11,12 @@ export LESS_TERMCAP_ue="$(tput sgr0)"
 export LESS_TERMCAP_us="$(tput bold)$(tput setaf 2)"
 
 # Set to avoid `env` output from changing console colour
-export LESS_TERMEND=$(tput sgr0)
+export LESS_TERMEND="$(tput sgr0)"
 
 # Setup paths
 remove_from_path() {
   [ -d "$1" ] || return
-  export PATH=$(echo "$PATH" | sed -e "s@:$1:@@g" -e "s@^$1:@@g" -e "s@:$1\$@@g" -e "s@^$1\$@@g")
+  export PATH="$(echo "$PATH" | sed -e "s@:$1:@@g" -e "s@^$1:@@g" -e "s@:$1\$@@g" -e "s@^$1\$@@g")"
 }
 
 add_to_path_start() {
@@ -79,10 +79,10 @@ then
   export GREP_OPTIONS="--color=auto"
   export CLICOLOR="1"
 
-#  add_to_path_end /Applications/Xcode.app/Contents/Developer/usr/bin
-#  add_to_path_end /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+  # add_to_path_end /Applications/Xcode.app/Contents/Developer/usr/bin
+  # add_to_path_end /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
   add_to_path_end "$HOMEBREW_PREFIX/opt/git/share/git-core/contrib/diff-highlight"
-  add_to_path_end "$(gem environment gemdir)/bin"
+  add_to_path_end "$HOMEBREW_PREFIX/Homebrew/Library/Homebrew/shims/gems"
 
   if quiet_which diff-highlight
   then
@@ -119,7 +119,7 @@ then
   alias finder-hide="setfile -a V"
 
   # Old default Curl is broken for Git on Leopard.
-  # shellcheck disable=SC2039
+  # shellcheck disable=SC3028
   [ "$OSTYPE" = "darwin9.0" ] && export GIT_SSL_NO_VERIFY=1
 elif [ "$LINUX" ]
 then
@@ -145,7 +145,7 @@ if [ -z "${SSH_CONNECTION}" ] && quiet_which code
 then
   export EDITOR="code"
   export GIT_EDITOR="$EDITOR -w"
-  export SVN_EDITOR=$GIT_EDITOR
+  export SVN_EDITOR="$GIT_EDITOR"
 elif quiet_which vim
 then
   export EDITOR="vim"
@@ -160,7 +160,7 @@ then
   GPG_AGENT_SOCKET="$(gpgconf --list-dirs agent-ssh-socket)"
   if [ ! -S "$GPG_AGENT_SOCKET" ]; then
     gpg-agent --daemon >/dev/null 2>&1
-    export GPG_TTY=$(tty)
+    export GPG_TTY="$(tty)"
   fi
 
   # Set SSH to use gpg-agent if it is configured to do so
@@ -168,7 +168,7 @@ then
   if [ -n "$GPG_SSH_SUPPORT" ]
   then
     unset SSH_AGENT_PID
-    export SSH_AUTH_SOCK=$GPG_AGENT_SOCKET
+    export SSH_AUTH_SOCK="$GPG_AGENT_SOCKET"
     # launchctl setenv SSH_AUTH_SOCK $GPG_AGENT_SOCKET
   fi
 fi
