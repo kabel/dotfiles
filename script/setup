@@ -40,4 +40,4 @@ for DOTFILE in *; do
   fi
 done
 
-composer global install
+command -V composer 2>/dev/null 1>&2 && composer global install

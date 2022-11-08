@@ -16,7 +16,11 @@ export LESS_TERMEND="$(tput sgr0)"
 # Setup paths
 remove_from_path() {
   [ -d "$1" ] || return
-  export PATH="$(echo "$PATH" | sed -e "s@:$1:@@g" -e "s@^$1:@@g" -e "s@:$1\$@@g" -e "s@^$1\$@@g")"
+  PATHSUB=":$PATH:"
+  PATHSUB=${PATHSUB//:$1:/:}
+  PATHSUB=${PATHSUB#:}
+  PATHSUB=${PATHSUB%:}
+  export PATH="$PATHSUB"
 }
 
 add_to_path_start() {
@@ -43,7 +47,6 @@ quiet_which() {
 }
 
 add_to_path_end "$HOME/bin"
-add_to_path_end "$HOME/.composer/vendor/bin"
 add_to_path_start "/usr/local/bin"
 add_to_path_start "/usr/local/sbin"
 
@@ -60,6 +63,21 @@ alias rsync="rsync --partial --progress --human-readable --compress"
 alias rg="rg --colors 'match:style:nobold' --colors 'path:style:nobold'"
 alias gist="gist --open --copy"
 alias sha256="shasum -a 256"
+alias sourcerc="source ~/.bash_profile && source ~/.zshrc"
+alias usebash="chsh -s /bin/bash"
+alias usezsh="chsh -s /bin/zsh"
+alias yarnr="find . -type d -name node_modules -prune -exec rm -rf {} \; && yarn"
+alias yarnu="yarn upgrade-interactive --latest"
+alias yarnv=yarnVersion
+
+# validate cd enhanced requirements
+quiet_which jabba || export CD_USE_JABBA=""
+quiet_which nvm || export CD_USE_NVM=""
+
+#nvm settings
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 
 # Platform-specific stuff
 if quiet_which brew
@@ -71,7 +89,6 @@ then
   export HOMEBREW_PRY=1
 
   alias hbc='cd $HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-core'
-
 fi
 
 if [ "$MACOS" ]
@@ -175,12 +192,70 @@ fi
 
 # Run dircolors if it exists
 quiet_which dircolors && eval "$(dircolors -b)"
+quiet_which gdircolors && eval "$(gdircolors -b)"
 
 # Save directory changes
 cd() {
-  command cd "$@" || return
-  pwd > "$HOME/.lastpwd"
-  ls
+  builtin cd "$@" || return
+  [ -n "$CD_SAVE_LASTPWD" ] && pwd > "$HOME/.lastpwd"
+  [ -n "$CD_USE_JABBA" ] && useJabbarc
+  [ -n "$CD_USE_NVM" ] && useNvmrc
+  [ -n "$CD_DO_LS" ] && ls
+}
+
+useNvmrc() {
+  [ -f .nvmrc ] && nvm use
+}
+
+useJabbarc() {
+  if [ -f .jabbarc ]; then
+    jabba install
+    jabba use
+  fi
+}
+
+gitUpstream() {
+  CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+  git checkout master
+  git fetch upstream
+  git rebase upstream/master
+  git push origin master
+  git checkout "${CURRENT_BRANCH}"
+}
+
+gitPullRequest() {
+  remote=${2:-origin}
+  git fetch "${remote}" "+refs/pull/$1/head:refs/remotes/${remote}/pr/$1"
+  git pull --no-rebase --squash "${remote}" "pull/$1/head"
+}
+
+gitPullRequestUpstream() {
+  git reset --hard
+  gitUpstream
+  remote=${2:-upstream}
+  git fetch "${remote}" "+refs/pull/$1/head:refs/remotes/${remote}/pr/$1"
+  git pull --no-rebase --squash "${remote}" "pull/$1/head"
+}
+
+killport() {
+  port=$(lsof -n "-i4TCP:$1" | grep LISTEN | awk '{ print $2 }')
+  kill -9 "$port"
+}
+
+yarnVersion() {
+    echo "Uninstalling yarn..."
+    rm -f /usr/local/bin/yarnpkg
+    rm -f /usr/local/bin/yarn
+
+    echo "Removing yarn cache..."
+    if [ -z ${YARN_CACHE_FOLDER+x} ]; then
+        rm -rf "${YARN_CACHE_FOLDER}"
+    else
+        rm -rf "${HOME}/.yarn"
+    fi
+
+    echo "Installing yarn..."
+    curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version "$1"
 }
 
 # Pretty-print JSON files
@@ -195,10 +270,10 @@ trash() {
 }
 
 # GitHub API shortcut
-github_api_curl() {
+github_api_curl_() {
   curl -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/$1"
 }
-alias github_api_curl="noglob github-api-curl"
+alias github_api_curl="noglob github-api-curl_"
 
 code_backup() {
   code --list-extensions > "$HOME/.config/Code/User/Extensionsfile"
