@@ -40,4 +40,6 @@ for DOTFILE in *; do
   fi
 done
 
+mkdir -p ~/.ssh/controlmasters
+
 command -V composer 2>/dev/null 1>&2 && composer global install
