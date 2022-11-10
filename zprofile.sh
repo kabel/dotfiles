@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=SC1091
+
 # load shared shell configuration
 # shellcheck source=shprofile.sh
 source ~/.shprofile
