@@ -3,6 +3,7 @@
 /atom/packages
 /atom/recovery
 atom/split-diff
+/Brewfile.lock.json
 /composer/cache
 /composer/vendor
 /composer/.htaccess
@@ -38,6 +39,9 @@ atom/split-diff
 /config/Code/QuotaManager*
 /config/Code/WebStorage/QuotaManager*
 /config/configstore/update-notifier-*
+/config/gcloud/logs
+/config/gcloud/virtenv
+/config/gcloud/.*
 /config/hub
 /config/iterm2/AppSupport
 /config/qBittorrent
