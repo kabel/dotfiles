@@ -1,4 +1,4 @@
-#! /usr/local/bin/bash
+#! /bin/bash
 # alias: brew service
 #:  * `service` [args...]
 #:    `brew service` is an alias for `brew services`

@@ -1,4 +1,4 @@
-#! /usr/local/bin/bash
+#! /bin/bash
 # alias: brew oc
 #:  * `oc` [args...]
 #:    `brew oc` is an alias for `brew outdated --cask`

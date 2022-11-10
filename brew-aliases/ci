@@ -1,4 +1,4 @@
-#! /usr/local/bin/bash
+#! /bin/bash
 # alias: brew ci
 #:  * `ci` [args...]
 #:    `brew ci` is an alias for `brew install --cask`
