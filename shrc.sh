@@ -71,14 +71,14 @@ alias yarnr="find . -type d -name node_modules -prune -exec rm -rf {} \; && yarn
 alias yarnu="yarn upgrade-interactive --latest"
 alias yarnv=yarnVersion
 
-# validate cd enhanced requirements
-quiet_which jabba || export CD_USE_JABBA=""
-quiet_which nvm || export CD_USE_NVM=""
-
 #nvm settings
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+
+# validate cd enhanced requirements
+quiet_which jabba || export CD_USE_JABBA=""
+quiet_which nvm || export CD_USE_NVM=""
 
 # Platform-specific stuff
 if quiet_which brew
