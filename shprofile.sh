@@ -1,5 +1,5 @@
 #!/bin/sh
-# shellcheck disable=SC2155
+# shellcheck disable=SC2155,SC1091
 
 # 077 would be more secure, but 022 is more useful.
 umask 022
@@ -59,11 +59,13 @@ then
     }
     
     [ -n "$BASH_VERSION" ] && PROMPT_COMMAND='set_iterm_app_pwd'
+    # shellcheck disable=SC3024,SC3030
     [ -n "$ZSH_VERSION" ] && precmd_functions+=("set_iterm_app_pwd")
 fi
 
+# shellcheck disable=SC2164
 [ -s ~/.lastpwd ] && [ -n "$CD_SAVE_LASTPWD" ] && [ "$PWD" = "$HOME" ] && \
-  builtin cd "$(cat ~/.lastpwd)" 2>/dev/null || true
+  builtin cd "$(cat ~/.lastpwd)" 2>/dev/null
 
 [ $TERMINALAPP ] && set_terminal_app_pwd
 

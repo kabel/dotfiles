@@ -1,5 +1,5 @@
 #!/bin/sh
-# shellcheck disable=SC2155
+# shellcheck disable=SC2155,SC1091
 
 # Colourful manpages
 export LESS_TERMCAP_mb="$(tput bold)$(tput setaf 1)"
@@ -17,6 +17,7 @@ export LESS_TERMEND="$(tput sgr0)"
 remove_from_path() {
   [ -d "$1" ] || return
   PATHSUB=":$PATH:"
+  # shellcheck disable=SC3060
   PATHSUB=${PATHSUB//:$1:/:}
   PATHSUB=${PATHSUB#:}
   PATHSUB=${PATHSUB%:}
