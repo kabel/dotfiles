@@ -14,6 +14,7 @@ source ~/.shrc
 
 # History
 export HISTFILE=~/.zsh_history
+export HISTORY_IGNORE="(&|ls|bg|fg|exit)"
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_SAVE_NO_DUPS
