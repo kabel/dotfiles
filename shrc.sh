@@ -1,5 +1,5 @@
 #!/bin/sh
-# shellcheck disable=SC2155,SC1091
+# shellcheck disable=SC2155,SC1091,SC1090
 
 # Colourful manpages
 export LESS_TERMCAP_mb="$(tput bold)$(tput setaf 1)"
@@ -64,8 +64,8 @@ alias rsync="rsync --partial --progress --human-readable --compress"
 alias rg="rg --colors 'match:style:nobold' --colors 'path:style:nobold'"
 alias gist="gist --open --copy"
 alias sha256="shasum -a 256"
-alias sourcerc="source ~/.bash_profile && source ~/.zshrc"
 alias usebash="chsh -s /bin/bash"
+alias usebashlocal="chsh -s /usr/local/bin/bash"
 alias usezsh="chsh -s /bin/zsh"
 alias yarnr="find . -type d -name node_modules -prune -exec rm -rf {} \; && yarn"
 alias yarnu="yarn upgrade-interactive --latest"
@@ -135,6 +135,7 @@ then
   alias locate="mdfind -name"
   alias cpwd="pwd | tr -d '\\n' | pbcopy"
   alias finder-hide="setfile -a V"
+  alias finder-show="setfile -a v"
 
   # Old default Curl is broken for Git on Leopard.
   # shellcheck disable=SC3028
@@ -215,6 +216,11 @@ useJabbarc() {
   fi
 }
 
+# git alias shortcuts and functions
+alias gitp="git push origin head"
+alias gitr="git reset --hard HEAD && git clean -xfd"
+alias gitrb="git branch | grep -ve \"master\" | xargs git branch -D"
+
 gitUpstream() {
   CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
   git checkout master
@@ -223,20 +229,22 @@ gitUpstream() {
   git push origin master
   git checkout "${CURRENT_BRANCH}"
 }
+alias gitu=gitUpstream
 
 gitPullRequest() {
   remote=${2:-origin}
   git fetch "${remote}" "+refs/pull/$1/head:refs/remotes/${remote}/pr/$1"
   git pull --no-rebase --squash "${remote}" "pull/$1/head"
 }
+alias gitpr=gitPullRequest
 
 gitPullRequestUpstream() {
   git reset --hard
   gitUpstream
   remote=${2:-upstream}
-  git fetch "${remote}" "+refs/pull/$1/head:refs/remotes/${remote}/pr/$1"
-  git pull --no-rebase --squash "${remote}" "pull/$1/head"
+  gitPullRequest "$1" "${remote}"
 }
+alias gitpru=gitPullRequestUpstream
 
 killport() {
   port=$(lsof -n "-i4TCP:$1" | grep LISTEN | awk '{ print $2 }')
@@ -257,6 +265,11 @@ yarnVersion() {
 
     echo "Installing yarn..."
     curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version "$1"
+}
+
+sourcerc() {
+  [ -n "$ZSH_VERSION" ] && [ -e ~/.zshrc ] && . ~/.zshrc
+  [ -n "$BASH_VERSION" ] && [ -e ~/.bashrc ] && . ~/.bashrc
 }
 
 # Pretty-print JSON files
