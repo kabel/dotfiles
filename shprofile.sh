@@ -75,3 +75,4 @@ fi
 
 # Some post-secret aliases
 export HOMEBREW_GITHUB_API_TOKEN="$GITHUB_TOKEN"
+export GITHUB_ACCESS_TOKEN="$GITUB_TOKEN"
