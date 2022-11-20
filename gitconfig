@@ -51,10 +51,12 @@
 	# Merge a branch with a merge commit and resolve any conflicts
 	# always using that branch's version rather than the current branch.
 	theirs = !git noff -Xtheirs
-	# Fetch all branches and rebase the current branch against
-	# upstream/master.
+	# Fetch all branches and rebase the current branch against upstream/master.
 	rebase-against-master = !git fetch --all \
 	                      && git rebase $(git upstream)/master
+	# Fetch all branches and rebase the current branch against upstream/main.
+	rebase-against-main = !git fetch --all \
+	                    && git rebase $(git upstream)/main
 	# Push the current branch upstream to origin using the same branch
 	# name for the remote branch.
 	upstream-current-branch = !git push --set-upstream origin \
@@ -72,18 +74,20 @@
 	push-and-set-upstream = push --set-upstream
 	# Create a new branch by checking out another branch.
 	checkout-as-new-branch = checkout -b
-	# Rebase against origin/master and prompt for what operations
-	# should be performed.
-	interactively-rebase-against-origin-master = \
-	  !git rebase --interactive origin/master
+	# Rebase against origin/master and prompt for what operations should be performed.
+	interactively-rebase-against-origin-master = rebase --interactive origin/master
+	# Rebase against origin/main and prompt for what operations should be performed.
+	interactively-rebase-against-origin-main = rebase --interactive origin/main
 	# Show the commit log with a prettier, clearer history.
 	pretty-one-line-log = log --graph --oneline --decorate
 	# Commit any changes to files, squash them into the last commit
 	# and update its date.
 	fix-up-previous-commit = !git commit --all --amend \
 	                              --reuse-message=HEAD --date=\"$(date)\" #"
-	# Checkout the master branch and update it.
-	pull-master = !git checkout master && git pull
+	# Switch to the master branch and update it.
+	pull-master = !git switch master && git pull
+	# Switch to the main branch and update it.
+	pull-main = !git switch main && git pull
 	# Commit a work-in-progress commit (to use with
 	# fix-up-previous-commit)
 	work-in-progress = commit -a -m 'WIP'
@@ -99,16 +103,23 @@
 	unassume = update-index --no-assume-unchanged
 	# List all files that are assumed to be unchanged
 	assumed = !git ls-files -v | grep '^[hsmrck?]' | cut -c 3-
-	# Delete all non-master branches
-	delete-merged = !git branch --merged | grep -v 'master' | grep -v '*' | xargs -n 1 git branch -D
+	# Delete all non-master/main branches
+	delete-merged = !git branch --merged | grep -v 'master' | grep -v 'main' | grep -v '*' | xargs -n 1 git branch -D
 	# Get the merge-base compared to origin/master
 	merge-base-master = merge-base origin/master HEAD
+	# Get the merge-base compared to the origin/main
+	merge-base-main = merge-base origin/main HEAD
 	# Diff against the current branch's merge-base
 	diff-merge-base = !git diff $(git merge-base-master)
+	# Diff against the current branch's merge-base with main
+	diff-merge-base-main = !git diff $(git merge-base-main)
+	# Rebase the given branch against the given upstream (default: main)
+	rebase-merge = !git rebase ${2:-main} $1 && git switch ${2:-main} && git merge $1
 
 	## Shortened 'New' Commands
 	fahr = !git fetch --all && git hard-reset
 	rem = !git rebase-against-master
+	ram = !git rebase-against-main
 	wip = !git work-in-progress
 	pr = !git upstream-and-pull-request
 	up = !git upstream-current-branch
@@ -116,10 +127,12 @@
 	pf = !git push --force-with-lease
 	dm = !git diff-merge-base
 	mb = !git merge-base-master
+	mbm = !git merge-base-main
 	w = !git word-diff
 	u = !git push-and-set-upstream
 	b = !git checkout-as-new-branch
 	i = !git interactively-rebase-against-origin-master
+	im = !git interactively-rebase-against-origin-main
 	# `true` needed as the return status is wrong otherwise.
 	l = !git pretty-one-line-log || true
 	f = !git fix-up-previous-commit
