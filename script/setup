@@ -40,6 +40,13 @@ for DOTFILE in *; do
   fi
 done
 
+if [ $MACOS ] && [ ! -L "$HOME/Library/Application Support/Code" ]
+then
+  rm -rf "$HOME/Libary/Application Support/Code-bak"
+  mv "$HOME/Library/Application Support/Code" "$HOME/Library/Application Support/Code-bak"
+  ln -s ~/.config/Code "$HOME/Library/Application Support/Code"
+fi
+
 mkdir -p ~/.ssh/controlmasters
 
 command -V composer 2>/dev/null 1>&2 && composer global install
