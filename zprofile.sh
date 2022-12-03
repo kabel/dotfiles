@@ -23,7 +23,9 @@ setopt INC_APPEND_HISTORY
 # Correct minor directory changing spelling mistakes
 setopt CORRECT_ALL
 
-#todo: zsh completion
+# completion
+autoload -Uz compinit
+compinit
 
 # Colorful prompt
 USER_COLOR="$(tput bold)$(tput setaf 7)"
