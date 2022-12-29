@@ -182,6 +182,8 @@ then
     export GPG_TTY="$(tty)"
   fi
 
+  gpg-connect-agent /bye >/dev/null 2>&1
+
   # Set SSH to use gpg-agent if it is configured to do so
   GPG_SSH_SUPPORT=$(gpgconf --list-options gpg-agent 2>/dev/null | grep enable-ssh-support | cut -d : -f 10)
   if [ -n "$GPG_SSH_SUPPORT" ]
