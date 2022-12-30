@@ -20,10 +20,10 @@ grep -q "Microsoft" /proc/version 2>/dev/null && export UBUNTU_ON_WINDOWS=1
 [ -z "$USER" ] && export USER="$(whoami)"
 
 # Count CPUs for Make jobs
-if [ $MACOS ]
+if [ -n "$MACOS" ]
 then
   export CPUCOUNT="$(sysctl -n hw.ncpu)"
-elif [ $LINUX ]
+elif [ -n "$LINUX" ]
 then
   export CPUCOUNT="$(getconf _NPROCESSORS_ONLN)"
 else
@@ -38,7 +38,7 @@ fi
 
 # Enable Terminal.app folder icons
 [ "$TERM_PROGRAM" = "Apple_Terminal" ] && export TERMINALAPP=1
-if [ $TERMINALAPP ]
+if [ -n "$TERMINALAPP" ]
 then
   set_terminal_app_pwd() {
     # Tell Terminal.app about each directory change.
@@ -48,7 +48,7 @@ fi
 
 # Enable iTerm.app tab titles
 [ "$TERM_PROGRAM" = "iTerm.app" ] && export ITERMAPP=1
-if [ $ITERMAPP ] && echo "$TERM" | grep -q xterm
+if [ -n "$ITERMAPP" ] && echo "$TERM" | grep -q xterm
 then
     set_iterm_app_pwd() {
       printf '\e]0;%s@%s:%s\a' "${USER}" "${HOST%%.*}" "$(echo "$PWD" | sed -e "s@$HOME@~@g")"
@@ -63,7 +63,7 @@ fi
 [ -s ~/.lastpwd ] && [ -n "$CD_SAVE_LASTPWD" ] && [ "$PWD" = "$HOME" ] && \
   builtin cd "$(cat ~/.lastpwd)" 2>/dev/null
 
-[ $TERMINALAPP ] && set_terminal_app_pwd
+[ -n "$TERMINALAPP" ] && set_terminal_app_pwd
 
 # Load secrets
 # shellcheck disable=SC1090
