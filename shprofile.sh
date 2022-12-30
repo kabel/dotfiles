@@ -51,7 +51,7 @@ fi
 if [ -n "$ITERMAPP" ] && echo "$TERM" | grep -q xterm
 then
     set_iterm_app_pwd() {
-      printf '\e]0;%s@%s:%s\a' "${USER}" "${HOST%%.*}" "$(echo "$PWD" | sed -e "s@$HOME@~@g")"
+      printf '\e]0;%s@%s:%s\a' "${USER}" "${HOST}" "$(echo "$PWD" | sed -e "s@$HOME@~@g")"
     }
     
     [ -n "$BASH_VERSION" ] && PROMPT_COMMAND='set_iterm_app_pwd'
