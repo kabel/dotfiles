@@ -55,7 +55,7 @@ then
   HOST_COLOR="$(tput bold)$(tput setaf 6)"
 fi
 
-PS1_PREFIX="${USER_COLOR}\\u${RESET_COLOR}@${HOST_COLOR}\\h$RESET_COLOR \\W"
+PS1_PREFIX="${USER_COLOR}\\u${RESET_COLOR}@${HOST_COLOR}\\H$RESET_COLOR \\W"
 PS1_SUFFIX='\n\$ '
 PS1="${PS1_PREFIX}${PS1_SUFFIX}"
 
@@ -80,8 +80,9 @@ then
     __git_ps1 "$PS1_PREFIX" "$PS1_SUFFIX"
   }
 
-  # shellcheck disable=SC2034
-  GIT_PS1_SHOWCOLORHINTS=true
+  export GIT_PS1_SHOWCOLORHINTS=true
+  export GIT_PS1_SHOWDIRTYSTATE=true
+
   if [ -z "$ITERM_SHELL_INTEGRATION_INSTALLED" ]
   then
     export PROMPT_COMMAND="set_git_prompt; $PROMPT_COMMAND"
