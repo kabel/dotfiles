@@ -48,7 +48,12 @@ my_vcs_prompt() {
     vcs_info
     local changes=""
     [[ -n ${vcs_info_msg_1_} ]] && changes=" $vcs_info_msg_1_"
-    [[ -n ${vcs_info_msg_0_} ]] && PS1="${PS1_PREFIX} (${vcs_info_msg_0_}${vcs_info_msg_2_:u}${changes})${PS1_SUFFIX}"
+    if [[ -n ${vcs_info_msg_0_} ]]
+    then
+      PS1="${PS1_PREFIX} (${vcs_info_msg_0_}${vcs_info_msg_2_:u}${changes})${PS1_SUFFIX}"
+    else
+      PS1="${PS1_PREFIX}${PS1_SUFFIX}"
+    fi
 }
 precmd_functions+=(my_vcs_prompt)
 
