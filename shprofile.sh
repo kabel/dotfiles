@@ -10,10 +10,6 @@ export CD_USE_JABBA="1"
 export CD_USE_NVM="1"
 export CD_DO_LS="1"
 
-# Save more history
-export HISTSIZE=100000
-export SAVEHIST=100000
-
 # OS variables
 [ "$(uname -s)" = "Darwin" ] && export MACOS=1 && export UNIX=1
 [ "$(uname -s)" = "Linux" ] && export LINUX=1 && export UNIX=1

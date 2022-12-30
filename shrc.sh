@@ -1,6 +1,10 @@
 #!/bin/sh
 # shellcheck disable=SC2155,SC1091,SC1090
 
+# Save more history
+export HISTSIZE=100000
+export SAVEHIST=100000
+
 # Colourful manpages
 export LESS_TERMCAP_mb="$(tput bold)$(tput setaf 1)"
 export LESS_TERMCAP_md="$(tput bold)$(tput setaf 1)"
