@@ -88,5 +88,6 @@
     "ruby.rubocop.executePath": "/usr/local/Homebrew/Library/Homebrew/shims/gems/",
     "githubPullRequests.createOnPublishBranch": "never",
     "terminal.external.osxExec": "iTerm.app",
-    "terminal.integrated.defaultProfile.osx": "zsh"
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "githubPullRequests.pullBranch": "always"
 }
