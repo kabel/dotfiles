@@ -44,6 +44,7 @@ atom/split-diff
 /config/gcloud/.*
 /config/hub
 /config/iterm2/AppSupport
+/config/jgit
 /config/Microsoft*VisualStudio Services
 /config/qBittorrent
 /gnupg/*
