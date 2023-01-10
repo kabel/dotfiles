@@ -5,6 +5,39 @@ DOTFILESDIRREL=$(dirname "$0")
 cd "$DOTFILESDIRREL/.." || exit
 DOTFILESDIR=$(pwd -P)
 
+# Environment trigger to keep original file/directory contents
+DOTFILES_KEEP_ORIG="${DOTFILES_KEEP_ORIG:-}"
+
+appendOrigContent() {
+  [ -e "$1" ] || return
+  {
+    echo
+    echo "# Original dotfile content"
+    cat "$1"
+  } >>"$2"
+}
+
+syncDirContent() {
+  [ -e "$1" ] || return
+  rsync -a "$1/" "$2/"
+}
+
+keepOrig() {
+  [ -n "$DOTFILES_KEEP_ORIG" ] || return
+  if [ -d "$3" ]
+  then
+    syncDirContent "$1" "$2"
+  else
+    appendOrigContent "$1" "$2"
+  fi
+}
+
+keepOrigLink() {
+  [ -n "$DOTFILES_KEEP_ORIG" ] || return
+  [ ! "$(readlink "$1")" = "$2" ] || return
+  appendOrigContent "$1" "$2"
+}
+
 [ "$(uname -s)" = "Darwin" ] && export MACOS=1 && export UNIX=1
 [ "$(uname -s)" = "Linux" ] && export LINUX=1 && export UNIX=1
 uname -s | grep -q "_NT-" && export WINDOWS=1
@@ -23,27 +56,33 @@ for DOTFILE in *; do
     echo "$DOTFILE" | grep -q 'ssh' && continue
   fi
 
-  echo "$DOTFILE" | grep -q '\.sh' \
-    && HOMEFILE="$HOME/.$(echo "$DOTFILE" | sed -e 's/\.sh//')"
+  echo "$DOTFILE" | grep -q '\.sh' &&
+    HOMEFILE="$HOME/.$(echo "$DOTFILE" | sed -e 's/\.sh//')"
 
-  if [ $UNIX ]
+  if [ -n "$UNIX" ]
   then
-    if [ -L "$HOMEFILE" ] && ! [ -d "$DOTFILE" ]
+    if [ -L "$HOMEFILE" ] && [ ! -d "$DOTFILE" ]
     then
+      keepOrigLink "$HOMEFILE" "$DIRFILE"
+
       ln -sfv "$DIRFILE" "$HOMEFILE"
     else
+      keepOrig "$HOMEFILE" "$DIRFILE" "$DOTFILE"
+
       rm -rv "$HOMEFILE"
       ln -sv "$DIRFILE" "$HOMEFILE"
     fi
   else
+    keepOrig "$HOMEFILE" "$DIRFILE" "$DOTFILE"
+
     cp -rv "$DIRFILE" "$HOMEFILE"
   fi
 done
 
-if [ $MACOS ] && [ ! -L "$HOME/Library/Application Support/Code" ]
+if [ -n "$MACOS" ] && [ ! -L "$HOME/Library/Application Support/Code" ]
 then
-  rm -rf "$HOME/Libary/Application Support/Code-bak"
-  mv "$HOME/Library/Application Support/Code" "$HOME/Library/Application Support/Code-bak"
+  rsync -a "$HOME/Library/Application Support/Code/" ~/.config/Code/
+  rm -rf "$HOME/Library/Application Support/Code"
   ln -s ~/.config/Code "$HOME/Library/Application Support/Code"
 fi
 
