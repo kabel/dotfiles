@@ -20,8 +20,8 @@ compinit
 USER_COLOR="%B%F{white}"
 HOST_COLOR="%B%F{blue}"
 RESET_COLOR="%f%b"
-BACK_GREY_COLOR="%K{#23292e}"
-FORE_GREY_COLOR="%F{#23292e}"
+BACK_GREY_COLOR="%K{#2d363b}"
+FORE_GREY_COLOR="%F{#2d363b}"
 
 if [ "$USER" = "root" ]
 then

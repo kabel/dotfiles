@@ -44,8 +44,8 @@ shopt -s cdspell
 USER_COLOR="\\[$(tput bold)$(tput setaf 7)\\]"
 HOST_COLOR="\\[$(tput bold)$(tput setaf 4)\\]"
 RESET_COLOR="\\[$(tput sgr0)\\]"
-BACK_GREY_COLOR="\\[\e[0;48;2;35;41;46m\\]"
-FORE_GREY_COLOR="\\[\e[0;38;2;35;41;46m\\]"
+BACK_GREY_COLOR="\\[\e[0;48;2;45;54;59m\\]"
+FORE_GREY_COLOR="\\[\e[0;38;2;45;54;59m\\]"
 
 if [ "$USER" = "root" ]
 then
