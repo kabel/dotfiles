@@ -89,5 +89,8 @@
     "githubPullRequests.createOnPublishBranch": "never",
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.defaultProfile.osx": "zsh",
-    "githubPullRequests.pullBranch": "always"
+    "githubPullRequests.pullBranch": "always",
+    "git-graph.repository.commits.fetchAvatars": true,
+    "git.allowForcePush": true,
+    "github.gitProtocol": "ssh",
 }
