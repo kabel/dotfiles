@@ -21,7 +21,7 @@ USER_COLOR="%B%F{white}"
 HOST_COLOR="%B%F{blue}"
 RESET_COLOR="%f%b"
 BACK_GREY_COLOR="%K{#23292e}"
-FORE_GREY_COLOR="%F{23292e}"
+FORE_GREY_COLOR="%F{#23292e}"
 
 if [ "$USER" = "root" ]
 then
