@@ -20,6 +20,8 @@ compinit
 USER_COLOR="%B%F{white}"
 HOST_COLOR="%B%F{blue}"
 RESET_COLOR="%f%b"
+BACK_GREY_COLOR="%K{#23292e}"
+FORE_GREY_COLOR="%F{23292e}"
 
 if [ "$USER" = "root" ]
 then
@@ -32,13 +34,15 @@ then
 fi
 
 setopt prompt_subst
-PS1_PREFIX="${USER_COLOR}%n${RESET_COLOR}@${HOST_COLOR}%M$RESET_COLOR %1~"
+PS1_PREFIX="${BACK_GREY_COLOR} ${USER_COLOR}%n${RESET_COLOR}@${HOST_COLOR}%M${RESET_COLOR} %k${FORE_GREY_COLOR}%f %3~ "
 PS1_SUFFIX=$'\n'"%# "
 PS1="${PS1_PREFIX}${PS1_SUFFIX}"
 
 unset USER_COLOR
 unset HOST_COLOR
 unset RESET_COLOR
+unset BACK_GREY_COLOR
+unset FORE_GREY_COLOR
 
 autoload -Uz vcs_info
 vcs_info_msg_0_=
@@ -50,7 +54,7 @@ my_vcs_prompt() {
     [[ -n ${vcs_info_msg_1_} ]] && changes=" $vcs_info_msg_1_"
     if [[ -n ${vcs_info_msg_0_} ]]
     then
-      PS1="${PS1_PREFIX} (${vcs_info_msg_0_}${vcs_info_msg_2_:u}${changes})${PS1_SUFFIX}"
+      PS1="${PS1_PREFIX}%F{green}%S%s%f%K{green}%F{black}  ${vcs_info_msg_0_}${vcs_info_msg_2_:u}${changes} %f%k%F{green}%f ${PS1_SUFFIX}"
     else
       PS1="${PS1_PREFIX}${PS1_SUFFIX}"
     fi
@@ -58,10 +62,10 @@ my_vcs_prompt() {
 precmd_functions+=(my_vcs_prompt)
 
 zstyle ':vcs_info:*' max-exports 3
-zstyle ':vcs_info:git*' formats "%%F{green}%b%%f" "%u%c"
-zstyle ':vcs_info:git*' actionformats "%%F{green}%b%%f" "%u%c" "|%a %m"
-zstyle ':vcs_info:git*' stagedstr "%F{green}+%f"
-zstyle ':vcs_info:git*' unstagedstr "%F{red}*%f"
+zstyle ':vcs_info:git*' formats "%b" "%u%c"
+zstyle ':vcs_info:git*' actionformats "%b" "%u%c" "|%a %m"
+zstyle ':vcs_info:git*' stagedstr "+"
+zstyle ':vcs_info:git*' unstagedstr "*"
 zstyle ':vcs_info:git*' check-for-changes true
 zstyle ':vcs_info:git*' check-for-staged-changes true
 zstyle ':vcs_info:git*' patch-format "%n/%a"

@@ -44,6 +44,8 @@ shopt -s cdspell
 USER_COLOR="\\[$(tput bold)$(tput setaf 7)\\]"
 HOST_COLOR="\\[$(tput bold)$(tput setaf 4)\\]"
 RESET_COLOR="\\[$(tput sgr0)\\]"
+BACK_GREY_COLOR="\\[\e[0;48;2;35;41;46m\\]"
+FORE_GREY_COLOR="\\[\e[0;38;2;35;41;46m\\]"
 
 if [ "$USER" = "root" ]
 then
@@ -55,13 +57,16 @@ then
   HOST_COLOR="$(tput bold)$(tput setaf 6)"
 fi
 
-PS1_PREFIX="${USER_COLOR}\\u${RESET_COLOR}@${HOST_COLOR}\\H$RESET_COLOR \\W"
+PROMPT_DIRTRIM=3
+PS1_PREFIX="${BACK_GREY_COLOR} ${USER_COLOR}\\u${RESET_COLOR}${BACK_GREY_COLOR}@${HOST_COLOR}\\H${RESET_COLOR}${BACK_GREY_COLOR} ${FORE_GREY_COLOR}${RESET_COLOR} \\w "
 PS1_SUFFIX='\n\$ '
 PS1="${PS1_PREFIX}${PS1_SUFFIX}"
 
 unset USER_COLOR
 unset HOST_COLOR
 unset RESET_COLOR
+unset BACK_GREY_COLOR
+unset FORE_GREY_COLOR
 
 set_git_prompt() {
   return
@@ -77,10 +82,9 @@ fi
 if [ -f "$HOMEBREW_PREFIX/etc/bash_completion.d/git-prompt.sh" ]
 then
   set_git_prompt() {
-    __git_ps1 "$PS1_PREFIX" "$PS1_SUFFIX"
+    __git_ps1 "$PS1_PREFIX" "$PS1_SUFFIX" "\\[$(tput setaf 2)$(tput smso)\\]\\[$(tput sgr0)$(tput setab 2)$(tput setaf 0)\\]  %s \\[$(tput sgr0)$(tput setaf 2)\\]\\[$(tput sgr0)\\]"
   }
 
-  export GIT_PS1_SHOWCOLORHINTS=true
   export GIT_PS1_SHOWDIRTYSTATE=true
 
   if [ -z "$ITERM_SHELL_INTEGRATION_INSTALLED" ]
