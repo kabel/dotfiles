@@ -61,7 +61,7 @@ my_vcs_prompt() {
     if [[ "$GIT_REPO_INFO" == true* ]]
     then
       vcs_info_msg_0_="GIT_DIR!"
-      if [[ "$GIT_REPO_INFO" == "true true" ]]
+      if [[ "$GIT_REPO_INFO" == true?true ]]
       then 
         vcs_info_msg_0_="$(git symbolic-ref HEAD 2>/dev/null)"
         vcs_info_msg_0_="BARE:${vcs_info_msg_0_##refs/heads/}"
