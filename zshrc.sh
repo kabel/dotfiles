@@ -56,7 +56,20 @@ vcs_info_msg_0_=
 vcs_info_msg_1_=
 vcs_info_msg_2_=
 my_vcs_prompt() {
-    vcs_info
+    local GIT_REPO_INFO
+    GIT_REPO_INFO="$(git rev-parse --is-inside-git-dir --is-bare-repository 2>/dev/null)"
+    if [[ "$GIT_REPO_INFO" == true* ]]
+    then
+      vcs_info_msg_0_="GIT_DIR!"
+      if [[ "$GIT_REPO_INFO" == "true true" ]]
+      then 
+        vcs_info_msg_0_="$(git symbolic-ref HEAD 2>/dev/null)"
+        vcs_info_msg_0_="BARE:${vcs_info_msg_0_##refs/heads/}"
+      fi
+    else
+      vcs_info
+    fi
+    
     local changes=""
     [[ -n ${vcs_info_msg_1_} ]] && changes=" $vcs_info_msg_1_"
     if [[ -n ${vcs_info_msg_0_} ]]
