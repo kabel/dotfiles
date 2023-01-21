@@ -47,6 +47,12 @@ RESET_COLOR="\\[$(tput sgr0)\\]"
 BACK_GREY_COLOR="\\[\e[0;48;2;45;54;59m\\]"
 FORE_GREY_COLOR="\\[\e[0;38;2;45;54;59m\\]"
 
+if [ -n "$TERMINALAPP" ]
+then
+  BACK_GREY_COLOR="\\[$(tput setab 237)\\]"
+  FORE_GREY_COLOR="\\[$(tput setaf 237)\\]"
+fi
+
 if [ "$USER" = "root" ]
 then
   USER_COLOR="$(tput bold)$(tput setaf 5)"
@@ -58,7 +64,7 @@ then
 fi
 
 PROMPT_DIRTRIM=3
-PS1_PREFIX="${BACK_GREY_COLOR} ${USER_COLOR}\\u${RESET_COLOR}${BACK_GREY_COLOR}@${HOST_COLOR}\\H${RESET_COLOR}${BACK_GREY_COLOR} ${FORE_GREY_COLOR}${RESET_COLOR} \\w "
+PS1_PREFIX="${BACK_GREY_COLOR} ${USER_COLOR}\\u${RESET_COLOR}${BACK_GREY_COLOR}@${HOST_COLOR}\\H${RESET_COLOR}${BACK_GREY_COLOR} ${RESET_COLOR}${FORE_GREY_COLOR}${RESET_COLOR} \\w "
 PS1_SUFFIX='\n\$ '
 PS1="${PS1_PREFIX}${PS1_SUFFIX}"
 

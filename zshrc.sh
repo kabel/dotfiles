@@ -23,6 +23,13 @@ RESET_COLOR="%f%b"
 BACK_GREY_COLOR="%K{#2d363b}"
 FORE_GREY_COLOR="%F{#2d363b}"
 
+# Terminal.app only supports 256 colors
+if [ -n "$TERMINALAPP" ]
+then
+  BACK_GREY_COLOR="%K{237}"
+  FORE_GREY_COLOR="%F{237}"
+fi
+
 if [ "$USER" = "root" ]
 then
   USER_COLOR="%B%F{magenta}"
