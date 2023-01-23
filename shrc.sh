@@ -78,7 +78,7 @@ alias yarnv=yarnVersion
 #nvm settings
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+# [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 
 # validate cd enhanced requirements
 quiet_which jabba || export CD_USE_JABBA=""
@@ -189,7 +189,7 @@ then
   gpg-connect-agent /bye >/dev/null 2>&1
 
   # Set SSH to use gpg-agent if it is configured to do so
-  GPG_SSH_SUPPORT=$(gpgconf --list-options gpg-agent 2>/dev/null | grep enable-ssh-support | cut -d : -f 10)
+  GPG_SSH_SUPPORT=$(grep enable-ssh-support ~/.gnupg/gpg-agent.conf)
   if [ -n "$GPG_SSH_SUPPORT" ]
   then
     unset SSH_AGENT_PID
