@@ -128,6 +128,12 @@ then
     alias l.="exa -Fgd .*"
     alias ll.="exa -Fgdl .*"
     alias ls="exa -Fg"
+  elif quiet_which eza
+  then
+    alias ll="eza -Fgl"
+    alias l.="eza -Fgd .*"
+    alias ll.="eza -Fgdl .*"
+    alias ls="eza -Fg"
   else
     alias ll="ls -FGl"
     alias l.="ls -FGd .*"
