@@ -85,7 +85,7 @@ then
   source "$HOME/.iterm2_shell_integration.bash"
 fi
 
-if [ -f "$HOMEBREW_PREFIX/etc/bash_completion.d/git-prompt.sh" ]
+if [ "$(type -t __git_ps1)" = "function" ]
 then
   set_git_prompt() {
     __git_ps1 "$PS1_PREFIX" "$PS1_SUFFIX" "\\[$(tput setaf 2)$(tput smso)\\]\\[$(tput sgr0)$(tput setab 2)$(tput setaf 0)\\]  %s \\[$(tput sgr0)$(tput setaf 2)\\]\\[$(tput sgr0)\\]"
