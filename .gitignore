@@ -34,6 +34,8 @@ atom/split-diff
 /config/Code/Network Persistent State
 /config/Code/Preferences
 /config/Code/rapid_render.json
+/config/Code/VideoDecodeStats
+/config/Code/shared_proto_db
 /config/Code/storage.json
 /config/Code/User/History
 /config/Code/User/sync
