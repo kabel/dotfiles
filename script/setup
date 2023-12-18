@@ -50,7 +50,7 @@ for DOTFILE in *; do
   echo "$DOTFILE" | grep -Eq '(^script/$|\.txt$|\.md$)' && continue
 
   # Don't install some files unless you're also called kabel.
-  if echo "$USER" | grep -vq 'kabel'
+  if echo "$USER" | grep -vq 'kabel' && echo "$USER" | grep -vq 'kevin.abel'
   then
     echo "$DOTFILE" | grep -q 'gitconfig-user' && continue
     echo "$DOTFILE" | grep -q 'ssh' && continue
