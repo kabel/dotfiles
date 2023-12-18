@@ -52,8 +52,6 @@ quiet_which() {
 }
 
 add_to_path_end "$HOME/bin"
-add_to_path_start "/usr/local/bin"
-add_to_path_start "/usr/local/sbin"
 
 # Aliases
 alias mkdir="mkdir -vp"
@@ -75,27 +73,33 @@ alias yarnr="find . -type d -name node_modules -prune -exec rm -rf {} \; && yarn
 alias yarnu="yarn upgrade-interactive --latest"
 alias yarnv=yarnVersion
 
-#nvm settings
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+# Homebrew package manager
+if [ -x "/opt/homebrew/bin/brew" ] 
+then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -x "/usr/local/Homebrew/bin/brew" ]
+then
+  eval "$(/usr/local/Homebrew/bin/brew shellenv)"
+fi
 
-# validate cd enhanced requirements
-quiet_which jabba || export CD_USE_JABBA=""
-quiet_which nvm || export CD_USE_NVM=""
-
-# Platform-specific stuff
 if quiet_which brew
 then
-  export HOMEBREW_PREFIX="$(brew --prefix)"
-  export HOMEBREW_REPOSITORY="$(brew --repo)"
-  export HOMEBREW_AUTO_UPDATE_SECS=3600
   export HOMEBREW_DEVELOPER=1
   export HOMEBREW_PRY=1
 
   alias hbc='cd $HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-core'
 fi
 
+#nvm settings
+export NVM_DIR="$HOME/.nvm"
+[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
+
+# validate cd enhanced requirements
+quiet_which jabba || export CD_USE_JABBA=""
+quiet_which nvm || export CD_USE_NVM=""
+
+# Platform-specific stuff
 if [ "$MACOS" ]
 then
   export GREP_OPTIONS="--color=auto"
