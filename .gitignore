@@ -21,7 +21,7 @@ atom/split-diff
 /config/Code/Service Worker
 /config/Code/Session Storage
 /config/Code/TransportSecurity
-/config/Code/User/globalStorage
+/config/Code/User/**/globalStorage
 /config/Code/User/workspaceStorage
 /config/Code/webrtc_event_logs
 /config/Code/*.sock
