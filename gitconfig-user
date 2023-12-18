@@ -2,15 +2,12 @@
 	# Name used in commit messages.
 	name = Kevin Abel
 	# Email used in commit messages.
-	email = kevin.abel.0@gmail.com
+	email = kevin.abel@hudl.com
 	# GPG key ID
-	signingkey = E0F7636DDDB96BF6
+	signingkey = 61ADE32E2A885318
 [shell]
 	# Default SSH username.
-	username = kabel
-[bintray]
-	# Bintray username.
-	username = kabel
+	username = kevin.abel
 [github]
 	# GitHub username for command-line tools.
 	user = kabel
