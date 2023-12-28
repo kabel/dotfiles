@@ -109,3 +109,7 @@ if [ -f "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/pa
 
 # The next line enables shell command completion for gcloud.
 if [ -f "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"; fi
+
+#fix home/end keys
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
