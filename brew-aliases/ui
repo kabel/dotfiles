@@ -1,0 +1,6 @@
+#! /usr/local/bin/bash
+# alias: brew ui
+#:  * `ui` [args...]
+#:    `brew ui` is an alias for `brew uses --installed`
+brew uses --installed $*
+
