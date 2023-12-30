@@ -48,7 +48,6 @@
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.scrollback": 10000,
     "todo-tree.tree.showScanModeButton": false,
-    "window.zoomLevel": 0,
     "workbench.colorCustomizations": {
         "[Material Theme Darker High Contrast]": {
             "editor.selectionBackground": "#fff59d20",
@@ -85,6 +84,7 @@
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "newUntitledFile",
+    "ruby.rubocop.executePath": "/opt/homebrew/Library/Homebrew/shims/gems/",
     "githubPullRequests.createOnPublishBranch": "never",
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.defaultProfile.osx": "zsh",
@@ -98,4 +98,14 @@
     "shellcheck.exclude": [
         "SC1017"
     ],
+    "cSpell.userWords": [
+        "hudl",
+        "Sportscode",
+        "Volleymetrics",
+        "Wimu",
+        "Wyscout"
+    ],
+    "markdownlint.config": {
+        "no-bare-urls": false
+    },
 }
