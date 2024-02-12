@@ -134,10 +134,10 @@ then
     alias ls="exa -Fg"
   elif quiet_which eza
   then
-    alias ll="eza -Fgl"
-    alias l.="eza -Fgd .*"
-    alias ll.="eza -Fgdl .*"
-    alias ls="eza -Fg"
+    alias ll="eza -gl"
+    alias l.="eza -gd .*"
+    alias ll.="eza -gdl .*"
+    alias ls="eza -g"
   else
     alias ll="ls -FGl"
     alias l.="ls -FGd .*"
