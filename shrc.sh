@@ -177,7 +177,7 @@ fi
 if [ -z "${SSH_CONNECTION}" ] && quiet_which code
 then
   export EDITOR="code"
-  export GIT_EDITOR="$EDITOR -nw"
+  export GIT_EDITOR="$EDITOR -w"
   export SVN_EDITOR="$GIT_EDITOR"
 elif quiet_which vim
 then
