@@ -10,5 +10,5 @@ Host *
 	UseKeychain yes
 	AddKeysToAgent yes
 	ControlMaster auto
-	ControlPath ~/.ssh/controlmasters/%r@%h:%p.socket
+	ControlPath ~/.ssh/cm/%C
 	ControlPersist 30s
