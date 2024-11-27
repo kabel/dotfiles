@@ -146,7 +146,6 @@
 	# HTTP server.
 	httpd = webrick
 [diff]
-	# Use the macOS graphical three-way merge tool for graphical diffs.
 	tool = code
 	# Use the slower but better patience diff algorithm
 	algorithm = patience
