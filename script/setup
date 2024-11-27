@@ -79,13 +79,6 @@ for DOTFILE in *; do
   fi
 done
 
-if [ -n "$MACOS" ] && [ ! -L "$HOME/Library/Application Support/Code" ]
-then
-  rsync -a "$HOME/Library/Application Support/Code/" ~/.config/Code/
-  rm -rf "$HOME/Library/Application Support/Code"
-  ln -s ~/.config/Code "$HOME/Library/Application Support/Code"
-fi
-
-mkdir -p ~/.ssh/controlmasters
+mkdir -p ~/.ssh/cm
 
 command -V composer 2>/dev/null 1>&2 && composer global install
