@@ -113,3 +113,7 @@ if [ -f "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/co
 #fix home/end keys
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
+
+#fix alt + right/left keys
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
