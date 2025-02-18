@@ -1,2 +1,2 @@
 #!/bin/sh
-[ -n "$CD_SAVE_LASTPWD" ] && pwd > ~/.lastpwd
+[ -n "$CD_SAVE_LASTPWD" ] && [ "$(pwd)" != '/' ] && pwd > ~/.lastpwd

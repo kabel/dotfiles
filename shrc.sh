@@ -224,7 +224,7 @@ quiet_which gdircolors && eval "$(gdircolors -b)"
 # Save directory changes
 cd() {
   builtin cd "$@" || return
-  [ -n "$CD_SAVE_LASTPWD" ] && pwd > "$HOME/.lastpwd"
+  [ -n "$CD_SAVE_LASTPWD" ] && [ "$(pwd)" != '/' ] && pwd > "$HOME/.lastpwd"
   [ -n "$CD_USE_JABBA" ] && useJabbarc
   [ -n "$CD_USE_NVM" ] && useNvmrc
   [ -n "$CD_DO_LS" ] && ls
