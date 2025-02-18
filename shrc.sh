@@ -105,6 +105,9 @@ then
   eval "$(rbenv init - --no-rehash "$(basename "$SHELL")")"
 fi
 
+# Rancher Desktop
+add_to_path_start ~/.rd/bin
+
 # Platform-specific stuff
 if [ "$MACOS" ]
 then
