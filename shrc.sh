@@ -99,6 +99,12 @@ export NVM_DIR="$HOME/.nvm"
 quiet_which jabba || export CD_USE_JABBA=""
 quiet_which nvm || export CD_USE_NVM=""
 
+#rbenv settings
+if quiet_which rbenv
+then
+  eval "$(rbenv init - --no-rehash "$(basename "$SHELL")")"
+fi
+
 # Platform-specific stuff
 if [ "$MACOS" ]
 then
