@@ -10,7 +10,7 @@ Host *ec2.internal
 	StrictHostKeyChecking no
 	UserKnownHostsFile /dev/null
 
-Host kabel-mac-mini
+Host kabel-mac-mini kabel-mac-mini.local
 	ControlMaster no
 	ForwardAgent yes
     RemoteForward /Users/kabel/.gnupg/S.gpg-agent /Users/kevin.abel/.gnupg/S.gpg-agent.extra
