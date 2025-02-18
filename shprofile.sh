@@ -72,3 +72,8 @@ fi
 # Some post-secret aliases
 export HOMEBREW_GITHUB_API_TOKEN="$GITHUB_TOKEN"
 export GITHUB_ACCESS_TOKEN="$GITUB_TOKEN"
+
+# Added by OrbStack: command-line tools and integration
+# Comment this line if you don't want it to be added again.
+# shellcheck disable=SC1090
+. ~/.orbstack/shell/init.zsh 2>/dev/null || :
