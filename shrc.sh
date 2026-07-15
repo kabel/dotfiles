@@ -54,24 +54,6 @@ quiet_which() {
 add_to_path_end "$HOME/bin"
 
 # Aliases
-alias mkdir="mkdir -vp"
-alias df="df -H"
-alias rm="rm -iv"
-alias mv="mv -iv"
-alias cp="cp -irv"
-alias du="du -sh"
-alias make="nice make"
-alias less="less -iRFX"
-alias rsync="rsync --partial --progress --human-readable --compress"
-alias rg="rg --colors 'match:style:nobold' --colors 'path:style:nobold'"
-alias gist="gist --open --copy"
-alias sha256="shasum -a 256"
-alias usebash="chsh -s /bin/bash"
-alias usebashlocal="chsh -s /usr/local/bin/bash"
-alias usezsh="chsh -s /bin/zsh"
-alias yarnr="find . -type d -name node_modules -prune -exec rm -rf {} \; && yarn"
-alias yarnu="yarn upgrade-interactive --latest"
-alias yarnv=yarnVersion
 
 # Homebrew package manager
 if [ -x "/opt/homebrew/bin/brew" ] 
@@ -118,6 +100,7 @@ then
   # add_to_path_end /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
   add_to_path_end "$HOMEBREW_PREFIX/opt/git/share/git-core/contrib/diff-highlight"
   add_to_path_end "$HOMEBREW_PREFIX/Homebrew/Library/Homebrew/shims/gems"
+  add_to_path_end "$HOME/.dotnet/tools"
 
   if quiet_which diff-highlight
   then
@@ -133,6 +116,11 @@ then
   if quiet_which sdkmanager
   then
     export ANDROID_HOME=/usr/local/share/android-sdk
+  fi
+
+  if quiet_which dotnet
+  then
+    export DOTNET_ROOT="$HOMEBREW_PREFIX/opt/dotnet/libexec"
   fi
 
   if quiet_which exa
@@ -159,10 +147,6 @@ then
   alias cpwd="pwd | tr -d '\\n' | pbcopy"
   alias finder-hide="setfile -a V"
   alias finder-show="setfile -a v"
-
-  # Old default Curl is broken for Git on Leopard.
-  # shellcheck disable=SC3028
-  [ "$OSTYPE" = "darwin9.0" ] && export GIT_SSL_NO_VERIFY=1
 elif [ "$LINUX" ]
 then
   quiet_which keychain && eval "$(keychain -q --eval --agents ssh id_rsa)"
